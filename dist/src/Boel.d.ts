@@ -10,7 +10,11 @@ export default class Boel implements ValidatorInfoProvider {
     }): void;
     field(field_name: string): ValidationFacade;
     fields(...fields: string[]): ValidationFacade;
-    validate(rules: ValidationExecutionInterface[], data: DataMap): ValidationResult;
+    validate(specs: ValidationExecutionInterface[] | SimpleField[], data: DataMap): ValidationResult;
+    validateByRules(rules: ValidationExecutionInterface[], data: DataMap): {
+        has_errors: boolean;
+        error_map: {};
+    };
     validateFields(fields: SimpleField[], data: DataMap): ValidationResult;
     getMessageTemplate(validator: Validator): string;
 }
