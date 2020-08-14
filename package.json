@@ -18,7 +18,10 @@
     "release": "yarn publish --no-git-tag-version",
     "test": "jest"
   },
-  "keywords": ["Form Validation", "Javascript Form Validation"],
+  "keywords": [
+    "Form Validation",
+    "Javascript Form Validation"
+  ],
   "author": "Prasanth Janardhanan",
   "license": "MIT",
   "dependencies": {
@@ -52,6 +55,7 @@
     "ts-jest": "^24.0.2",
     "ts-jest-transformer": "^1.0.0",
     "ts-node": "^8.4.1",
+    "tslib": "^2.0.1",
     "typescript": "^3.6.2"
   }
 }

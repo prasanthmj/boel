@@ -71,7 +71,13 @@ export default class Boel implements ValidatorInfoProvider
         return (<ValidationFacade><unknown>field_v_wrapper);
     }
 
-    validate(rules:ValidationExecutionInterface[], data:DataMap ):ValidationResult
+    validate(specs:ValidationExecutionInterface[]|SimpleField[], 
+            data:DataMap ):ValidationResult
+    {
+        return this.validateByRules(specs as ValidationExecutionInterface[], data)
+    }
+
+    validateByRules(rules:ValidationExecutionInterface[], data:DataMap )
     {
         let error_map = {};
         for(let rule of rules)
@@ -92,7 +98,7 @@ export default class Boel implements ValidatorInfoProvider
         {
             return({has_errors:false});
         }
-        return this.validate(rules, data);
+        return this.validateByRules(rules, data);
     }
 
     getMessageTemplate(validator:Validator):string
@@ -111,4 +117,6 @@ export default class Boel implements ValidatorInfoProvider
         }
         return message_templ;
     }
+    
+    
 }
