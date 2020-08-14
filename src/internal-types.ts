@@ -1,5 +1,4 @@
 import {Validator, DataMap, ErrorMap} from "./types";
-import {FieldValidations} from "./FieldValidations";
 
 /**
  * Wrapper for a single field's validations

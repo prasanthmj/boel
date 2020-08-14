@@ -2,6 +2,7 @@ import {Validator, DataMap, ErrorMap} from "./types";
 import {Parser, Expression} from 'expr-eval';
 import {getValidatorName} from "./utils";
 import {ValidationExecutionInterface} from "./internal-types"
+import {mustache} from "./mustache";
 
 class ValidatorObj
 {
@@ -92,7 +93,7 @@ export class FieldValidations implements ValidationExecutionInterface
         }
         return error_map;
     }
-    getMessage(validn:ValidatorObj, _field:string, _data:DataMap):string
+    getMessage(validn:ValidatorObj, field:string, _data:DataMap):string
     {
         let message_templ = '';
         if(validn.message)
@@ -103,15 +104,10 @@ export class FieldValidations implements ValidationExecutionInterface
         {
             message_templ = this.validator_info.getMessageTemplate(validn.validator);
         }
+        const vmap = {field, ...validn.validator}
+        const msg = mustache(message_templ, vmap)
         
-        /*
-        const var_names = ['field', ...Object.keys(validn.validator)];
-        const var_values = [field, ...Object.values(validn.validator)];
-        const fn = new Function(...var_names,"return `"+message_templ +"`;");
-        const msg = fn(...var_values);
-        
-        */
-        return message_templ;
+        return msg;
     }
     public hasValidations():Boolean
     {

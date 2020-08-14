@@ -3,7 +3,7 @@ import {DataMap, Validator} from "../types";
 export default 
 class MaxLength implements Validator
 {
-    public readonly message="${field} exceeded max length ${max_length}";
+    public readonly message="{{field}} exceeded max length {{max_length}}";
     constructor(public max_length:number)
     {
 

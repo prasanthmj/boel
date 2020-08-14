@@ -5,18 +5,22 @@
     "module": "es2015",
     "importHelpers": true,
     "declaration": true,
+    "preserveConstEnums": true,
     "sourceMap": true,
+    "inlineSources": true,
+    "experimentalDecorators":true,
     "rootDir": "./src",
+    "types": ["node","jest"],
     "strict": true,
     "noUnusedLocals": true,
+    
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "moduleResolution": "node",
-    "baseUrl": "./",
-    "paths": {
-      "*": ["src/*", "node_modules/*"]
-    },
     "esModuleInterop": true
-  }
+  },
+  "exclude": [
+    "node_modules"
+  ]
 }
