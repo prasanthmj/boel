@@ -92,7 +92,7 @@ export class FieldValidations implements ValidationExecutionInterface
         }
         return error_map;
     }
-    getMessage(validn:ValidatorObj, field:string,data:DataMap):string
+    getMessage(validn:ValidatorObj, _field:string, _data:DataMap):string
     {
         let message_templ = '';
         if(validn.message)
@@ -104,13 +104,14 @@ export class FieldValidations implements ValidationExecutionInterface
             message_templ = this.validator_info.getMessageTemplate(validn.validator);
         }
         
+        /*
         const var_names = ['field', ...Object.keys(validn.validator)];
         const var_values = [field, ...Object.values(validn.validator)];
-        
         const fn = new Function(...var_names,"return `"+message_templ +"`;");
         const msg = fn(...var_values);
-
-        return msg;
+        
+        */
+        return message_templ;
     }
     public hasValidations():Boolean
     {

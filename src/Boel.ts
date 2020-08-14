@@ -1,7 +1,7 @@
 import {Validator, DataMap, ValidationResult, SimpleField} from "./types";
 import {FieldValidations, ValidatorInfoProvider} from "./FieldValidations";
 import {ValidatorMakerMap,ValidatorInfoMap, 
-    ValidatorFactoryFn, ValidationFacade, ValidationSupportInterface,
+    ValidatorFactoryFn, ValidationFacade,
     ValidationExecutionInterface } from "./internal-types";
 import {FieldValidationsWrapper} from "./FieldValidationsWrapper";
 import {getValidatorName} from "./utils";

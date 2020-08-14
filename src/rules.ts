@@ -1,7 +1,6 @@
 import Required from "./Validations/required";
 import MaxLength from "./Validations/MaxLength";
 import MinLength from "./Validations/MinLength";
-import Alphabetic from "./Validations/Alphabetic";
 import Comparison from "./Validations/Comparison";
 
 import {ValidationExecutionInterface} from "./internal-types";
