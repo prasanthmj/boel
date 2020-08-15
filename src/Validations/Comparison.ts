@@ -8,37 +8,37 @@ const comparison_operators:ComparisonMap=
 {
     '<':{
             name:'LessThan',
-            message:"${field} should be less than ${test_value}",
+            message:"{{field}} should be less than {{test_value}}",
             fn:(a,b)=>(a < b)
         },
     '<=':
         {
             name:'LessThanOrEqualTo',
-            message:"${field} should be less than or equal to ${test_value}",
+            message:"{{field}} should be less than or equal to {{test_value}}",
             fn:(a,b)=>(a <= b)
         }, 
         '>':
         {
             name:'GreaterThan',
-            message:"${field} should be greater than ${test_value}",
+            message:"{{field}} should be greater than {{test_value}}",
             fn:(a,b)=>(a > b)
         },
         '>=':
         {
             name: 'GreaterThanOrEqualTo',
-            message:"${field} should be greater than or equal to ${test_value}",
+            message:"{{field}} should be greater than or equal to {{test_value}}",
             fn:(a,b)=>(a >= b)
         },
         '=':
         {
             name: 'EqualTo',
-            message:"${field} should be equal to ${test_value}",
+            message:"{{field}} should be equal to {{test_value}}",
             fn:(a,b)=>(a === b)
         },
         '!=':
         {
             name: 'NotEqualTo',
-            message: "${field} should not be equal to ${test_value}",
+            message: "{{field}} should not be equal to {{test_value}}",
             fn:(a,b)=>(a !== b)
         }
 };

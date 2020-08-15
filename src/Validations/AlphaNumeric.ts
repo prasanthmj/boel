@@ -3,7 +3,7 @@ import {DataMap, Validator} from "../types";
 export default 
 class AlphaNumeric implements Validator
 {
-    public readonly message="${field} can contain only alpha-numeric characters";
+    public readonly message="{{field}} can contain only alpha-numeric characters";
     constructor(public allow_space:Boolean=true)
     {
 

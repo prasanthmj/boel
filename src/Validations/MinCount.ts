@@ -3,7 +3,7 @@ import {DataMap, Validator} from "../types";
 export default
 class MinCount implements Validator
 {
-    public readonly message="For ${field}, select at least ${min_count} options";
+    public readonly message="For {{field}}, select at least {{min_count}} options";
     constructor(public min_count:number)
     {
 

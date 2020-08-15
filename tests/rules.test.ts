@@ -1,7 +1,4 @@
-import {generateRules} from "../src/rules";
 import {makeBoel} from "../src/BoelProvider";
-import {ValidatorInfoProvider} from "../src/FieldValidations";
-import {Validator} from "../src/types";
 
 var txt_settings='{"fields":[{"name":"name","type":"text","validations":[{"_vtype":"Required","condition":"","enabled":true,"message":""}]},{"name":"email","type":"text","validations":[{"_vtype":"Required","condition":"","enabled":true,"message":""}]},{"name":"Age","type":"number","validations":[{"_vtype":"GreaterThan","condition":"","message":"","num":"15"},{"_vtype":"LessThan","condition":"","message":"","num":"60"}]}]}';
 

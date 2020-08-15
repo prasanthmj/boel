@@ -1,6 +1,5 @@
 import Selected from "../../src/Validations/Selected";
-import {DataMap} from "../../src/types";
-import {makeBoel} from "../../src/entry";
+import {makeBoel} from "../../src/index";
 
 
 describe("Selected",()=>

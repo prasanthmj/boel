@@ -62,7 +62,7 @@ describe("GeneralValidations",()=>
             b.field("some_name").isRequired(),
             b.field("another_name").isRequired()
         ]
-        b.updateMessages({'Required':"${field} is required."});
+        b.updateMessages({'Required':"{{field}} is required."});
 
         let res = b.validate(rules, {});
         //console.log("validation results ", res);
@@ -124,7 +124,7 @@ describe("GeneralValidations",()=>
     {
         let b = makeBoel();
 
-        const custom_message = "${field} length should be less than ${max_length}";
+        const custom_message = "{{field}} length should be less than {{max_length}}";
 
         let rules = [
             b.field('message').maxLength(5).message(custom_message),

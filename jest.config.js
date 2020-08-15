@@ -5,7 +5,6 @@ module.exports = {
    "coveragePathIgnorePatterns": [
      "/node_modules/"
    ],
-   "unmockedModulePathPatterns":["jasmine-expect"],
    "moduleFileExtensions": [
     "js",
     "ts"
@@ -13,10 +12,7 @@ module.exports = {
   "rootDir": "./tests",
   "testEnvironment": "node",
   "transform": {
-    
-    '\\.js$': 'babel-jest',
-    "\\.tsx?$": "ts-jest"
-    
+    "\\.ts$": "ts-jest"
   }
 
 }
