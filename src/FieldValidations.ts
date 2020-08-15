@@ -1,5 +1,5 @@
 import {Validator, DataMap, ErrorMap} from "./types";
-import {Parser, Expression} from 'expr-eval';
+import {Parser, Expression, Value} from 'expr-eval';
 import {getValidatorName} from "./utils";
 import {ValidationExecutionInterface} from "./internal-types"
 import {mustache} from "./mustache";
@@ -7,7 +7,7 @@ import {mustache} from "./mustache";
 class ValidatorObj
 {
     public validator:Validator;
-    public message:string='';
+    public message='';
     public condition_expr:Expression|null=null;
 
     constructor(validator:Validator)
@@ -33,6 +33,7 @@ export interface ValidatorInfoProvider
     getMessageTemplate(validator:Validator):string
 }
 
+
 export class FieldValidations implements ValidationExecutionInterface
 {
     private validations:ValidatorObj[]=[];
@@ -42,18 +43,18 @@ export class FieldValidations implements ValidationExecutionInterface
     {
 
     }
-    addValidation(v:Validator)
+    addValidation(v:Validator):void
     {
         this.validations.push( new ValidatorObj(v) );
     }
-    addMessage(msg_templ:string)
+    addMessage(msg_templ:string):void
     {
         if(this.validations.length > 0)
         {
             this.validations[this.validations.length-1].message = msg_templ;
         }
     }
-    addCondition(condition:string)
+    addCondition(condition:string):void
     {
         if(this.validations.length > 0)
         {
@@ -62,18 +63,19 @@ export class FieldValidations implements ValidationExecutionInterface
     }
     validate(data:DataMap):ErrorMap
     {
-        let error_map:ErrorMap={};
-        for(let validation of this.validations)
+        const error_map:ErrorMap={};
+        for(const validation of this.validations)
         {
             
             if(validation.condition_expr !== null)
             {
-                const result = validation.condition_expr.evaluate(data);
+                const result = 
+                    validation.condition_expr.evaluate(<Value>data);
                 
                 if(!result){ continue; }
             }
 
-            for (let field of this.fields) 
+            for (const field of this.fields) 
             {
                 //TODO: check the field is present in the data
                 // Also check the validator check for undefined
@@ -84,7 +86,7 @@ export class FieldValidations implements ValidationExecutionInterface
                     {
                         error_map[field] = { 
                             validation: getValidatorName(validation.validator) ,
-                            message: this.getMessage(validation,field,data)
+                            message: this.getMessage(validation,field)
                         };
                     }
                 }
@@ -93,7 +95,7 @@ export class FieldValidations implements ValidationExecutionInterface
         }
         return error_map;
     }
-    getMessage(validn:ValidatorObj, field:string, _data:DataMap):string
+    getMessage(validn:ValidatorObj, field:string):string
     {
         let message_templ = '';
         if(validn.message)
@@ -109,9 +111,10 @@ export class FieldValidations implements ValidationExecutionInterface
         
         return msg;
     }
-    public hasValidations():Boolean
+    public hasValidations():boolean
     {
         return(this.validations.length > 0 ?true:false);
     }
 
 }
+

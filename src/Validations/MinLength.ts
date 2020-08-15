@@ -9,7 +9,7 @@ class MinLength implements Validator
     {
 
     }
-    validate(field_name:string, data:DataMap)
+    validate(field_name:string, data:DataMap):boolean
     {
         if(typeof(data[field_name]) == 'undefined')
         {

@@ -2,7 +2,7 @@ import {DataMap, Validator} from "../types";
 
 interface ComparisonMap
 {
-    [cmp:string]:{ name:string, message:string, fn:(a:number|string,b:number|string)=>Boolean}
+    [cmp:string]:{ name:string, message:string, fn:(a:number|string,b:number|string)=>boolean}
 }
 const comparison_operators:ComparisonMap=
 {
@@ -49,7 +49,7 @@ interface ComparisonOptions
     test_field ?: string
 }
 
-enum TestType{ Value, Field };
+enum TestType{ Value, Field }
 
 export default 
 class Comparison implements Validator
@@ -57,11 +57,11 @@ class Comparison implements Validator
     public message="";
     public test_value:string|number=0;
     private test_against= TestType.Value;
-    public name:string="";
+    public name="";
     
     constructor(private comparison:string,private options:ComparisonOptions)
     {
-        let operators = Object.keys(comparison_operators);
+        const operators = Object.keys(comparison_operators);
         if(!operators.includes(comparison))
         {
             throw Error(`unsupported comparison operator ${comparison}`);
@@ -85,9 +85,9 @@ class Comparison implements Validator
         
 
     }
-    validate(field_name:string, data:DataMap):Boolean
+    validate(field_name:string, data:DataMap):boolean
     {
-        let value = this.getOtherValue(data);
+        const value = this.getOtherValue(data);
 
         if(this.comparison == '=' || this.comparison == '!=')
         {
@@ -104,22 +104,22 @@ class Comparison implements Validator
         if(this.test_against == TestType.Field )
         {
             //This conditions shouldn't happen since the test is already done in contrsuctor. But typescript doesn't know that
-            if(typeof(this.options.test_field) == 'undefined'){ throw Error("The test_field is not provided") } ;
+            if(typeof(this.options.test_field) == 'undefined'){ throw Error("The test_field is not provided") }
 
             return data[this.options.test_field];
         }   
         else
         {
-            if(typeof(this.options.test_value) == 'undefined'){ throw Error("The test_value is not provided") } ;
+            if(typeof(this.options.test_value) == 'undefined'){ throw Error("The test_value is not provided") }
 
             return(this.options.test_value);
         }
     }
-    doComparison(param1:number, param2:number)
+    doComparison(param1:number, param2:number):boolean
     {
         return comparison_operators[this.comparison].fn(param1, param2);
     }
-    doEqualTest(param1:number|string, param2:number|string)
+    doEqualTest(param1:number|string, param2:number|string):boolean
     {
         return comparison_operators[this.comparison].fn(param1, param2);
     }
