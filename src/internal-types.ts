@@ -19,7 +19,7 @@ export interface ValidationExecutionInterface
     validate(data:DataMap):ErrorMap
 }
 
-export type ValidatorFactoryFn= (...args:any[])=>Validator;
+export type ValidatorFactoryFn= (...args:unknown[])=>Validator|null;
 
 /**
  * Validation facade exposes all validation methods (like isRequired() maxLength())
@@ -33,7 +33,7 @@ export type ValidationFacade = ValidationSupportInterface & ValidatorMakerMap & 
  * It takes variable number of arguments, attaches the validations to the field and then returns the 
  * Facade object so that more validations can be chained
  */
-export  type ValidatorWrapperFn = (...args:any[])=>ValidationFacade;
+export  type ValidatorWrapperFn = (...args:unknown[])=>ValidationFacade;
 
 
 export interface ValidatorMakerMap

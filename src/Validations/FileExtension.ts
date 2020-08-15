@@ -11,11 +11,11 @@ class FileExtension implements Validator
        this.valid_extensions = this.extensions_str.split(',').map((str)=>(str.trim()));
     }
     
-    validate(field_name:string, data:DataMap)
+    validate(field_name:string, data:DataMap):boolean
     {
         if(data[field_name])
         {
-            let ext = data[field_name].split('.').pop();
+            const ext = data[field_name].split('.').pop();
             
             if(!this.valid_extensions.includes(ext))
             {

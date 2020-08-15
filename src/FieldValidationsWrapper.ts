@@ -23,7 +23,7 @@ export class FieldValidationsWrapper
         this.field_v.addMessage(m);
         return(<ValidationFacade><unknown>this);
     }
-    onlyWhen(condition:string)
+    onlyWhen(condition:string):ValidationFacade
     {
         this.field_v.addCondition(condition);
         return(<ValidationFacade><unknown>this);
