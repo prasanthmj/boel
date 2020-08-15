@@ -38,8 +38,8 @@ b.fields("name", "email").areRequired().maxLength(100);
 ```js
 /** change/translate message templates for all validations */
 b.updateMessages({
-    'Required':"${field} is required", 
-    "MaxLength":"The input shouldn't exceed ${max_length} characters"
+    'Required':"{{field}} is required", 
+    "MaxLength":"The input shouldn't exceed {{max_length}} characters"
 })
 
 ```

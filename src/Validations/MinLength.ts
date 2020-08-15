@@ -3,7 +3,7 @@ import {DataMap, Validator} from "../types";
 export default 
 class MinLength implements Validator
 {
-    public readonly message="${field} input length should be at least ${min_length}";
+    public readonly message="{{field}} input length should be at least {{min_length}}";
 
     constructor(public min_length:number)
     {

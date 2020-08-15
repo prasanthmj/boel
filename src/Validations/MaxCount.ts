@@ -3,7 +3,7 @@ import {DataMap, Validator} from "../types";
 export default
 class MaxCount implements Validator
 {
-    public readonly message="${field} selections exceeds max limit ${max_count}";
+    public readonly message="{{field}} selections exceeds max limit {{max_count}}";
     constructor(public max_count:number)
     {
 

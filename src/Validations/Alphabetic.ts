@@ -3,7 +3,7 @@ import {DataMap, Validator} from "../types";
 export default 
 class Alphabetic implements Validator
 {
-    public readonly message="${field} can contain only English alphabetic characters";
+    public readonly message="{{field}} can contain only English alphabetic characters";
     constructor(public allow_space:Boolean=true)
     {
 

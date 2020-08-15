@@ -3,7 +3,7 @@ import {DataMap, Validator} from "../types";
 export default 
 class FileExtension implements Validator
 {
-    public readonly message="Valid file extensions are: ${extensions_str}";
+    public readonly message="Valid file extensions are: {{extensions_str}}";
     private valid_extensions:string[] = []
     
     constructor(private extensions_str:string)
