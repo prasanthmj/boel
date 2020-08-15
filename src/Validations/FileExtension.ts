@@ -13,10 +13,14 @@ class FileExtension implements Validator
     
     validate(field_name:string, data:DataMap):boolean
     {
-        if(data[field_name])
+        if(data[field_name] && typeof(data[field_name]) == "string")
         {
-            const ext = data[field_name].split('.').pop();
-            
+            const filename = data[field_name] as string
+            const ext = filename.split('.').pop();
+            if(typeof(ext) =="undefined")
+            {
+                return false;
+            }
             if(!this.valid_extensions.includes(ext))
             {
                 return false;

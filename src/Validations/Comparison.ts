@@ -91,7 +91,18 @@ class Comparison implements Validator
 
         if(this.comparison == '=' || this.comparison == '!=')
         {
-            return this.doEqualTest(data[field_name], value);
+            if(typeof(data[field_name]) == "string")
+            {
+                return this.doEqualTest(String(data[field_name]), value);
+            }
+            else if(typeof(data[field_name]) == "number")
+            {
+                return this.doEqualTest(Number(data[field_name]), value);
+            }
+            else
+            {
+                return false;
+            }
         }
         else
         {
@@ -105,8 +116,18 @@ class Comparison implements Validator
         {
             //This conditions shouldn't happen since the test is already done in contrsuctor. But typescript doesn't know that
             if(typeof(this.options.test_field) == 'undefined'){ throw Error("The test_field is not provided") }
-
-            return data[this.options.test_field];
+            if(typeof(data[this.options.test_field]) == "string")
+            {
+                return(String(data[this.options.test_field]));
+            }
+            else if(typeof(data[this.options.test_field]) == "number")
+            {
+                return(Number(data[this.options.test_field]));
+            }
+            else
+            {
+                throw Error("Wrong type for test_field (neither string nor number)");
+            }
         }   
         else
         {
