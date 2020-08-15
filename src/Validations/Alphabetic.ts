@@ -4,11 +4,11 @@ export default
 class Alphabetic implements Validator
 {
     public readonly message="{{field}} can contain only English alphabetic characters";
-    constructor(public allow_space:Boolean=true)
+    constructor(public allow_space:boolean=true)
     {
 
     }
-    validate(field_name:string, data:DataMap)
+    validate(field_name:string, data:DataMap):boolean
     {
         let re = /^[A-Za-z]+$/i;
         if(this.allow_space)

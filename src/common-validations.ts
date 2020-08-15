@@ -12,7 +12,7 @@ import Selected from "./Validations/Selected";
 import FileExtension from "./Validations/FileExtension";
 
 
-export function add_common_validations(boel:Boel)
+export function add_common_validations(boel:Boel):Boel
 {
     boel.addValidator(["isRequired","areRequired","required"], ()=>new Required)
 
@@ -21,10 +21,10 @@ export function add_common_validations(boel:Boel)
         .addValidator(["minLength","checkMinLength"], (min:number)=> new MinLength(min))
 
         .addValidator(["isAlphabetic","areAlphabetic"], 
-                (allow_spaces:Boolean=true)=> new Alphabetic(allow_spaces))
+                (allow_spaces=true)=> new Alphabetic(allow_spaces))
 
         .addValidator(["isAlphaNumeric","areAlphaNumeric"], 
-                (allow_spaces:Boolean=true)=> new AlphaNumeric(allow_spaces))
+                (allow_spaces=true)=> new AlphaNumeric(allow_spaces))
 
         .addValidator(["isEmail","areEmails"], ()=>new Email())
 

@@ -5,7 +5,7 @@ class Required implements Validator
 {
     public readonly message="{{field}} is required";
 
-    validate(field_name:string, data:DataMap)
+    validate(field_name:string, data:DataMap):boolean
     {
         if (data[field_name]) 
         {

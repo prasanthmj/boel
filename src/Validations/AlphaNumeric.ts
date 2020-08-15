@@ -4,11 +4,11 @@ export default
 class AlphaNumeric implements Validator
 {
     public readonly message="{{field}} can contain only alpha-numeric characters";
-    constructor(public allow_space:Boolean=true)
+    constructor(public allow_space:boolean=true)
     {
 
     }
-    validate(field_name:string, data:DataMap)
+    validate(field_name:string, data:DataMap):boolean
     {
         let re = /^[A-Za-z0-9]+$/i;
         if(this.allow_space)

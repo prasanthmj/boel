@@ -26,7 +26,7 @@ export default class Boel implements ValidatorInfoProvider
         else
         {
             const names = name;
-            for(let name_x of names)
+            for(const name_x of names)
             {
                 this.addValidator(name_x, vfatory);
             }
@@ -34,9 +34,9 @@ export default class Boel implements ValidatorInfoProvider
         return this;
     }
 
-    updateMessages(messages:{[validator:string]:string})
+    updateMessages(messages:{[validator:string]:string}):void
     {
-        for(let validator_name in messages )
+        for(const validator_name in messages )
         {
             if(!this.all_validators[validator_name])
             {
@@ -55,7 +55,7 @@ export default class Boel implements ValidatorInfoProvider
 
     field(field_name:string):ValidationFacade
     {
-        let field_v_wrapper = new FieldValidationsWrapper(new FieldValidations([field_name],this));
+        const field_v_wrapper = new FieldValidationsWrapper(new FieldValidations([field_name],this));
 
         Object.assign(field_v_wrapper, this.validator_makers);
 
@@ -64,7 +64,7 @@ export default class Boel implements ValidatorInfoProvider
 
     fields(...fields:string[]):ValidationFacade
     {
-        let field_v_wrapper = new FieldValidationsWrapper(new FieldValidations(fields,this));
+        const field_v_wrapper = new FieldValidationsWrapper(new FieldValidations(fields,this));
 
         Object.assign(field_v_wrapper, this.validator_makers);
 
@@ -77,23 +77,23 @@ export default class Boel implements ValidatorInfoProvider
         return this.validateByRules(specs as ValidationExecutionInterface[], data)
     }
 
-    validateByRules(rules:ValidationExecutionInterface[], data:DataMap )
+    validateByRules(rules:ValidationExecutionInterface[], data:DataMap ):ValidationResult
     {
         let error_map = {};
-        for(let rule of rules)
+        for(const rule of rules)
         {
-            let field_errors = rule.validate(data);
+            const field_errors = rule.validate(data);
             error_map = {...error_map, ...field_errors};
         }
 
-        let has_errors = (Object.keys(error_map).length > 0) ? true:false;
+        const has_errors = (Object.keys(error_map).length > 0) ? true:false;
         
         return({has_errors, error_map});
     }
     
     validateFields(fields:SimpleField[], data:DataMap ):ValidationResult
     {
-        let rules = generateRules(fields, this);
+        const rules = generateRules(fields, this);
         if(rules.length <= 0)
         {
             return({has_errors:false});
@@ -106,7 +106,7 @@ export default class Boel implements ValidatorInfoProvider
         let message_templ  = 'Error! ';
         const v_name = getValidatorName(validator);
 
-        if( this.all_validators[v_name] &&  
+        if(this.all_validators[v_name] &&  
         this.all_validators[v_name].message)
         {
             message_templ = this.all_validators[v_name].message!;

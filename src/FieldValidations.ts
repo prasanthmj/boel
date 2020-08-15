@@ -7,7 +7,7 @@ import {mustache} from "./mustache";
 class ValidatorObj
 {
     public validator:Validator;
-    public message:string='';
+    public message='';
     public condition_expr:Expression|null=null;
 
     constructor(validator:Validator)
@@ -42,18 +42,18 @@ export class FieldValidations implements ValidationExecutionInterface
     {
 
     }
-    addValidation(v:Validator)
+    addValidation(v:Validator):void
     {
         this.validations.push( new ValidatorObj(v) );
     }
-    addMessage(msg_templ:string)
+    addMessage(msg_templ:string):void
     {
         if(this.validations.length > 0)
         {
             this.validations[this.validations.length-1].message = msg_templ;
         }
     }
-    addCondition(condition:string)
+    addCondition(condition:string):void
     {
         if(this.validations.length > 0)
         {
@@ -62,8 +62,8 @@ export class FieldValidations implements ValidationExecutionInterface
     }
     validate(data:DataMap):ErrorMap
     {
-        let error_map:ErrorMap={};
-        for(let validation of this.validations)
+        const error_map:ErrorMap={};
+        for(const validation of this.validations)
         {
             
             if(validation.condition_expr !== null)
@@ -73,7 +73,7 @@ export class FieldValidations implements ValidationExecutionInterface
                 if(!result){ continue; }
             }
 
-            for (let field of this.fields) 
+            for (const field of this.fields) 
             {
                 //TODO: check the field is present in the data
                 // Also check the validator check for undefined
@@ -109,7 +109,7 @@ export class FieldValidations implements ValidationExecutionInterface
         
         return msg;
     }
-    public hasValidations():Boolean
+    public hasValidations():boolean
     {
         return(this.validations.length > 0 ?true:false);
     }

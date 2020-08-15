@@ -8,7 +8,7 @@ export interface Validator
 {
     readonly name ?: string;
     readonly message ?: string;
-    validate(field_name:string, data:DataMap):Boolean;
+    validate(field_name:string, data:DataMap):boolean;
 }
 
 
@@ -19,7 +19,7 @@ export interface ErrorMap
 
 export interface ValidationResult
 {
-    has_errors:Boolean;
+    has_errors:boolean;
     error_map?:ErrorMap;
 }
 

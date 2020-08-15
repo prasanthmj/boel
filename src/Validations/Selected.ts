@@ -5,7 +5,7 @@ class Selected implements Validator
 {
     public readonly message="{{field}} should be selected";
 
-    validate(field_name:string, data:DataMap)
+    validate(field_name:string, data:DataMap):boolean
     {
         if (data[field_name]) 
         {

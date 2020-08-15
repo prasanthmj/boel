@@ -9,11 +9,11 @@ import {SimpleField} from "./types";
 
 export function generateRules(fields:SimpleField[], infoP:ValidatorInfoProvider):ValidationExecutionInterface[]
 {
-    let retFvs:ValidationExecutionInterface[] = [] 
-    for(let f of fields)
+    const retFvs:ValidationExecutionInterface[] = [] 
+    for(const f of fields)
     {
-        let fv = new FieldValidations([f.name], infoP)
-        for(let v of f.validations)
+        const fv = new FieldValidations([f.name], infoP)
+        for(const v of f.validations)
         {
             let validation = null;
             switch(v._vtype)
