@@ -15,7 +15,12 @@ class MinCount implements Validator
             //won't validate if field is not present
             return true;
         }
-        if(data[field_name].length < this.min_count)
+        if(! Array.isArray(data[field_name]) )
+        {
+            return true;
+        }
+        const arr = data[field_name] as string[]
+        if(arr.length < this.min_count)
         {
             return false;
         }
