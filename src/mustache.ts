@@ -8,10 +8,10 @@
 	
 */
 
-export function mustache(string:string, data:Record<string,any>):string{
+export function mustache(string:string, data:Record<string,unknown>):string{
 	if (typeof(string) === "string" && typeof(data) === "object") {
 		for (const key in data) {
-			string = string.replace(new RegExp("{{\\s*" + key + "\\s*}}", "g"), data[key]);
+			string = string.replace(new RegExp("{{\\s*" + key + "\\s*}}", "g"), String(data[key]));
 		}
 	}
 	return string;

@@ -1,5 +1,5 @@
 import {Validator, DataMap, ErrorMap} from "./types";
-import {Parser, Expression} from 'expr-eval';
+import {Parser, Expression, Value} from 'expr-eval';
 import {getValidatorName} from "./utils";
 import {ValidationExecutionInterface} from "./internal-types"
 import {mustache} from "./mustache";
@@ -32,6 +32,7 @@ export interface ValidatorInfoProvider
 {
     getMessageTemplate(validator:Validator):string
 }
+
 
 export class FieldValidations implements ValidationExecutionInterface
 {
@@ -68,7 +69,8 @@ export class FieldValidations implements ValidationExecutionInterface
             
             if(validation.condition_expr !== null)
             {
-                const result = validation.condition_expr.evaluate(data);
+                const result = 
+                    validation.condition_expr.evaluate(<Value>data);
                 
                 if(!result){ continue; }
             }
@@ -84,7 +86,7 @@ export class FieldValidations implements ValidationExecutionInterface
                     {
                         error_map[field] = { 
                             validation: getValidatorName(validation.validator) ,
-                            message: this.getMessage(validation,field,data)
+                            message: this.getMessage(validation,field)
                         };
                     }
                 }
@@ -93,7 +95,7 @@ export class FieldValidations implements ValidationExecutionInterface
         }
         return error_map;
     }
-    getMessage(validn:ValidatorObj, field:string, _data:DataMap):string
+    getMessage(validn:ValidatorObj, field:string):string
     {
         let message_templ = '';
         if(validn.message)
@@ -115,3 +117,4 @@ export class FieldValidations implements ValidationExecutionInterface
     }
 
 }
+

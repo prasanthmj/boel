@@ -17,9 +17,13 @@ export default class Boel implements ValidatorInfoProvider
     {
         if(typeof name == 'string')
         {
-            this.validator_makers[name] = function(this:ValidationFacade, ...args:any[])
+            this.validator_makers[name] = function(this:ValidationFacade, ...args:unknown[])
             {
-                this.addValidation(vfatory(...args));
+                const vdtr = vfatory(...args)
+                if(vdtr != null)
+                {
+                    this.addValidation(vdtr);    
+                }
                 return this;
             }
         }
@@ -109,6 +113,7 @@ export default class Boel implements ValidatorInfoProvider
         if(this.all_validators[v_name] &&  
         this.all_validators[v_name].message)
         {
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
             message_templ = this.all_validators[v_name].message!;
         }
         else if(validator.message)

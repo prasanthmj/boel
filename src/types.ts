@@ -1,7 +1,7 @@
 
 export interface DataMap
 {
-    [field:string]:any
+    [field:string]:unknown
 }
 
 export interface Validator
