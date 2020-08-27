@@ -43,3 +43,22 @@ b.updateMessages({
 })
 
 ```
+
+## Validations available by default
+
+#### Required
+For example:
+
+```js
+b.field("name").isRequired()
+
+b.field("total").required()
+```
+
+#### MaxLength
+checks the length of the input in characters
+```js
+b.field("name").maxLength(32)
+
+b.field("email").checkMaxLength(23)
+```
