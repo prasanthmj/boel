@@ -5,8 +5,8 @@
   "main": "dist/boel.ssr.js",
   "module": "dist/boel.esm.js",
   "unpkg": "dist/boel.min.js",
-  "types": "dist/src/entry.d.ts",
-  "typings": "dist/src/entry.d.ts",
+  "types": "dist/index.d.ts",
+  "typings": "dist/index.d.ts",
   "files": [
     "dist/*"
   ],
