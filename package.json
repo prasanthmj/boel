@@ -1,6 +1,6 @@
 {
   "name": "boel",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Form Data validation library",
   "main": "dist/boel.ssr.js",
   "module": "dist/boel.esm.js",
