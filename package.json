@@ -1,8 +1,8 @@
 {
   "name": "boel",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Form Data validation library",
-  "main": "dist/boel.ssr.js",
+  "main": "dist/boel.cjs.js",
   "module": "dist/boel.esm.js",
   "unpkg": "dist/boel.min.js",
   "types": "dist/index.d.ts",

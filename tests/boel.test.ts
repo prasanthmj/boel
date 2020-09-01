@@ -6,14 +6,14 @@ describe("Boel", ()=>
 {
     test("make_validator simple setup",()=>
     {
-        let b = new Boel();
+        const b = new Boel();
 
-        b.addValidator("simplyMatches",(param:string)=>
+        b.addValidator("simplyMatches",(param:unknown)=>
         ({
             validate(field_name:string, data:DataMap)
             {
                 //console.log("inside validator function");
-                return(data[field_name] === param);
+                return(data[field_name] === <string>param);
             }
         }));
 
