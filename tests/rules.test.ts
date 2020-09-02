@@ -1,14 +1,18 @@
 import {makeBoel} from "../src/BoelProvider";
 
-var txt_settings='{"fields":[{"name":"name","type":"text","validations":[{"_vtype":"Required","condition":"","enabled":true,"message":""}]},{"name":"email","type":"text","validations":[{"_vtype":"Required","condition":"","enabled":true,"message":""}]},{"name":"Age","type":"number","validations":[{"_vtype":"GreaterThan","condition":"","message":"","num":"15"},{"_vtype":"LessThan","condition":"","message":"","num":"60"}]}]}';
 
-var txt_settings2='{"fields":[{"name":"name","type":"text","validations":[{"_vtype":"Required","condition":"","enabled":true,"message":""},{"_vtype":"MaxLength","condition":"","message":"some error message for maxlen","size":"5"}]},{"name":"email","type":"text","validations":[{"_vtype":"Required","condition":"","enabled":true,"message":""}]},{"name":"Age","type":"number","validations":[{"_vtype":"GreaterThan","condition":"","message":"","num":"15"},{"_vtype":"LessThan","condition":"","message":"","num":"60"}]}]}'
+const txt_settings = `{"fields":[{"id":"sEUp4g6li","name":"name","type":"text","validations":[{"message":"","condition":"","enabled":true,"_vtype":"Required"}],"__type":"text"},{"id":"LsWOBpjNR","name":"email","type":"text","validations":[{"message":"","condition":"","enabled":true,"_vtype":"Required"}],"__type":"text"}]}`
+
+
+//var txt_settings='{"fields":[{"name":"name","type":"text","validations":[{"_vtype":"Required","condition":"","enabled":true,"message":""}]},{"name":"email","type":"text","validations":[{"_vtype":"Required","condition":"","enabled":true,"message":""}]},{"name":"Age","type":"number","validations":[{"_vtype":"GreaterThan","condition":"","message":"","num":"15"},{"_vtype":"LessThan","condition":"","message":"","num":"60"}]}]}';
+
+const txt_settings2='{"fields":[{"name":"name","type":"text","validations":[{"_vtype":"Required","condition":"","enabled":true,"message":""},{"_vtype":"MaxLength","condition":"","message":"some error message for maxlen","size":"5"}]},{"name":"email","type":"text","validations":[{"_vtype":"Required","condition":"","enabled":true,"message":""}]},{"name":"Age","type":"number","validations":[{"_vtype":"GreaterThan","condition":"","message":"","num":"15"},{"_vtype":"LessThan","condition":"","message":"","num":"60"}]}]}'
 
 describe("validateFields", ()=>
 {
     test("required",()=>
     {
-        let settings = JSON.parse(txt_settings);
+        const settings = JSON.parse(txt_settings);
         let b = makeBoel();
         
         let res = b.validateFields(settings.fields, {});
