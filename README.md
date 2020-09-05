@@ -103,6 +103,25 @@ b.field("user_email").isEmail()
 b.fields("email1", "email2").areEmails()
 ```
 
+#### Less Than
+Compare the input to a fixed number
+
+```js
+b.field("weight").isLessThan(80)
+
+b.fields("luggage", "checkin").areLessThan(25)
+```
+
+#### Less Than Or Equal To
+Check whether the input is <= a number
+
+```js
+b.field("weight").lessThanOrEqualTo(82)
+
+b.fields("luggage", "checkin").areLessThanOrEqualTo(35)
+```
+
+
 
 
 
