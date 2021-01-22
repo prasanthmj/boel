@@ -1,5 +1,5 @@
 export interface DataMap {
-    [field: string]: unknown;
+    [field: string]: any;
 }
 export interface Validator {
     readonly name?: string;
@@ -17,13 +17,15 @@ export interface ValidationResult {
     error_map?: ErrorMap;
 }
 export declare type SimpleValidation = {
-    _vtype: string;
     condition: "";
     message: "";
     [k: string]: string | number;
 };
+export declare type ValidationMap = {
+    [v: string]: SimpleValidation;
+};
 export declare type SimpleField = {
     name: string;
     type: string;
-    validations: SimpleValidation[];
+    validations: ValidationMap;
 };

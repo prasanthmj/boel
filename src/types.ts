@@ -1,7 +1,7 @@
-
+import {FieldValidations} from "./FieldValidations";
 export interface DataMap
 {
-    [field:string]:unknown
+    [field:string]:any
 }
 
 export interface Validator
@@ -25,14 +25,16 @@ export interface ValidationResult
 
 
 export type SimpleValidation={
-    _vtype:string,
     condition:"",
     message:"",
     [k:string]:string|number    
 }
 
+export type ValidationMap={
+    [v:string]:SimpleValidation
+}
 export type SimpleField={
     name: string,
     type: string,
-    validations: SimpleValidation[]
+    validations: ValidationMap
 }

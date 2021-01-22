@@ -13,33 +13,34 @@ export function generateRules(fields:SimpleField[], infoP:ValidatorInfoProvider)
     for(const f of fields)
     {
         const fv = new FieldValidations([f.name], infoP)
-        for(const v of f.validations)
+        for(const v in f.validations)
         {
+            const vx = f.validations[v]
             let validation = null;
-            switch(v._vtype)
+            switch(v)
             {
-                case "Required":
+                case "required":
                     validation = new Required();
                     break;
-                case "MaxLength":
-                    validation = new MaxLength(+v.size);
+                case "maxlength":
+                    validation = new MaxLength(+vx.size);
                     break;
-                case "MinLength":
-                    validation = new MinLength(+v.size);
+                case "minlength":
+                    validation = new MinLength(+vx.size);
                     break;
                 case "LessThan":
-                    validation = new Comparison('<', {test_value: +v.num});
+                    validation = new Comparison('<', {test_value: +vx.num});
                     break;
                 case "GreaterThan":
-                    validation = new Comparison('>', {test_value: +v.num});
+                    validation = new Comparison('>', {test_value: +vx.num});
                     break;
             }
             
             if(validation)
             {
                 fv.addValidation(validation);
-                v.message && fv.addMessage(v.message);
-                v.condition && fv.addCondition(v.condition);
+                vx.message && fv.addMessage(vx.message);
+                vx.condition && fv.addCondition(vx.condition);
             }
         }
         if(fv.hasValidations())

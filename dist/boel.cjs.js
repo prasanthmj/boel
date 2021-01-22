@@ -2196,40 +2196,40 @@ function () {
     var f = fields_1[_i];
     var fv = new FieldValidations([f.name], infoP);
 
-    for (var _a = 0, _b = f.validations; _a < _b.length; _a++) {
-      var v = _b[_a];
+    for (var v in f.validations) {
+      var vx = f.validations[v];
       var validation = null;
 
-      switch (v._vtype) {
-        case "Required":
+      switch (v) {
+        case "required":
           validation = new Required();
           break;
 
-        case "MaxLength":
-          validation = new MaxLength(+v.size);
+        case "maxlength":
+          validation = new MaxLength(+vx.size);
           break;
 
-        case "MinLength":
-          validation = new MinLength(+v.size);
+        case "minlength":
+          validation = new MinLength(+vx.size);
           break;
 
         case "LessThan":
           validation = new Comparison('<', {
-            test_value: +v.num
+            test_value: +vx.num
           });
           break;
 
         case "GreaterThan":
           validation = new Comparison('>', {
-            test_value: +v.num
+            test_value: +vx.num
           });
           break;
       }
 
       if (validation) {
         fv.addValidation(validation);
-        v.message && fv.addMessage(v.message);
-        v.condition && fv.addCondition(v.condition);
+        vx.message && fv.addMessage(vx.message);
+        vx.condition && fv.addCondition(vx.condition);
       }
     }
 

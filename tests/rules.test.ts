@@ -1,21 +1,128 @@
+import {generateRules} from "../src/rules";
 import {makeBoel} from "../src/BoelProvider";
 
+const txt_settings=`{
+    "fields": [
+      {
+        "name": "name",
+        "type": "text",
+        "validations": {
+            "required":{
+                "enabled": true
+            }
+        }
+      },
+      {
+        "name": "email",
+        "type": "text",
+        "validations": {
+            "required":{
+                "enabled": true
+            }
+        }
+      },
+      {
+        "name": "Age",
+        "type": "number",
+        "validations": {
+            "greaterthan": {
+                "num": "15"
+            },
+            "lessthan":{
+                "num": "60"
+            }            
+        }
+      }
+    ]
+  }`;
 
-const txt_settings = `{"fields":[{"id":"sEUp4g6li","name":"name","type":"text","validations":[{"message":"","condition":"","enabled":true,"_vtype":"Required"}],"__type":"text"},{"id":"LsWOBpjNR","name":"email","type":"text","validations":[{"message":"","condition":"","enabled":true,"_vtype":"Required"}],"__type":"text"}]}`
+const txt_settings2=`
+{
+    "fields": [
+      {
+        "name": "name",
+        "type": "text",
+        "validations": {
+            "required": {
+                "enabled": true
+            },
+            "maxlength":{
+                "message": "some error message for maxlen",
+                "size": "5"
+            }
+        }
+      },
+      {
+        "name": "email",
+        "type": "text",
+        "validations": {
+            "required": {
+                "enabled": true
+            }
+        }
+      },
+      {
+        "name": "Age",
+        "type": "number",
+        "validations": {
+            "greaterthan": {
+                "num": "15"
+            },
+            "lessthan": {
+                "num": "60"
+            }
+        }
+      }
+    ]
+  }
+`
 
-
-//var txt_settings='{"fields":[{"name":"name","type":"text","validations":[{"_vtype":"Required","condition":"","enabled":true,"message":""}]},{"name":"email","type":"text","validations":[{"_vtype":"Required","condition":"","enabled":true,"message":""}]},{"name":"Age","type":"number","validations":[{"_vtype":"GreaterThan","condition":"","message":"","num":"15"},{"_vtype":"LessThan","condition":"","message":"","num":"60"}]}]}';
-
-const txt_settings2='{"fields":[{"name":"name","type":"text","validations":[{"_vtype":"Required","condition":"","enabled":true,"message":""},{"_vtype":"MaxLength","condition":"","message":"some error message for maxlen","size":"5"}]},{"name":"email","type":"text","validations":[{"_vtype":"Required","condition":"","enabled":true,"message":""}]},{"name":"Age","type":"number","validations":[{"_vtype":"GreaterThan","condition":"","message":"","num":"15"},{"_vtype":"LessThan","condition":"","message":"","num":"60"}]}]}'
-
-describe("validateFields", ()=>
+const txt_settings3=
+`
+[
+    {
+      "pos": 0,
+      "type": "text",
+      "name": "name",
+      "label": "",
+      "validations": {
+        "maxlength": {
+          "condition": "",
+          "message": "",
+          "size": 52
+        },
+        "required": {
+          "enabled": true
+        }
+      },
+      "settings": null
+    },
+    {
+      "pos": 0,
+      "type": "email",
+      "name": "email",
+      "label": "",
+      "validations": {
+        "maxlength": {
+          "size": 52
+        },
+        "required": {
+          "enabled": true
+        }
+      },
+      "settings": null
+    }
+  ]
+`
+describe("generaterules", ()=>
 {
     test("required",()=>
     {
         const settings = JSON.parse(txt_settings);
-        let b = makeBoel();
-        
-        let res = b.validateFields(settings.fields, {});
+        const b = makeBoel();
+        const rules = generateRules(settings.fields, b);
+        console.log("validation rules ", rules);
+        const res = b.validate(rules, {});
         console.log("validation results ", res);
         expect(res.has_errors).toEqual(true);
         if(res.error_map)
@@ -27,12 +134,11 @@ describe("validateFields", ()=>
     
     test("maxlen",()=>
     {
-        let settings = JSON.parse(txt_settings2);
-        let b = makeBoel();
-        
-        //let rules = generateRules(settings.fields, b);
-        
-        let res = b.validateFields(settings.fields, {name:"a very very long name", email:"some@website.com"});
+        const settings = JSON.parse(txt_settings2);
+        const b = makeBoel();
+        const rules = generateRules(settings.fields, b);
+        console.log("validation rules ", rules);
+        const res = b.validate(rules, {name:"a very very long name", email:"some@website.com"});
         console.log("validation results ", res);
         expect(res.has_errors).toEqual(true);
         if(res.error_map)
@@ -40,5 +146,19 @@ describe("validateFields", ()=>
             expect(res.error_map.name.validation).toEqual("MaxLength");
             expect(res.error_map.name.message).toEqual("some error message for maxlen"); 
         }
+    })
+    
+    test("VDNS100: new validation structure",()=>
+    {
+        const fds = `{"email": "valentin.nader@gusikowski.com"}`
+        const fields = JSON.parse(txt_settings3);
+        const b = makeBoel();
+        const rules = generateRules(fields, b);
+        console.log("validation rules ", rules);
+        const fd =  JSON.parse(fds);
+        const res = b.validate(rules, fd);
+        console.log("validation results ", res);
+        expect(res.has_errors).toEqual(true);
+        
     })
 })
